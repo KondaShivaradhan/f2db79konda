@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  -
+   let results =[
+      {
+        "insect_Name": "spider",
+        "insect_loc": "india",
+        "insect_variant": 123
+      },
+      {
+        "insect_Name": "Ant",
+        "insect_loc": "Africa",
+        "insect_variant": 2342
+      },
+      {
+        "insect_Name": "bees",
+        "insect_loc": "China",
+        "insect_variant": 234
+      },
+      {
+        "insect_Name": "butterfly",
+        "insect_loc": "Sri lanka",
+        "insect_variant": 979
+      },
+      {
+        "insect_Name": "Lizard",
+        "insect_loc": "USA",
+        "insect_variant": 988
+      }
+    ]
+  h1= title
+  .container-fluid 
+    .row 
+      each insect in results
+        div(class="col-sm-2" style=`border:solid 2px black` onclick=`buy(${results.indexOf(insect)})`) 
+          each value,key in insect 
+            = " " +value
+  script.
+    function buy(index){
+      alert("You purchased item "+index)
+    }
+

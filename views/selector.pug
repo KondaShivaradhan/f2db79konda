@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Hello this is Konda Shivardhan's #{title}
+  - var image_names = ["butterfly.jpg","snake.jpg","ant.webp","bees.webp","spider.jpg"]
+  - var i =0;
+  - while(i<3){
+     - var randindex = Math.floor(Math.random()*5)
+     - img = "/images/"+image_names[randindex]
+     - i++
+     img(src=img,  height="300px",width="300px",alt="alt")     
+  -}

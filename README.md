@@ -1,6 +1,6 @@
-# f2wb79Konda
-Konda Shivaradhan Lab 10 and Assignment 10
-[Hosted link](https://f2wb79konda.onrender.com)
+# f2db79Konda
+Konda Shivaradhan Lab 11 and Assignment 11
+[Hosted link](https://f2db79konda.onrender.com)
 <br>
 Class Seleted <b>insects</b>
 | Attribute | type | 

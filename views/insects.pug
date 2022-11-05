@@ -2,7 +2,7 @@ extends layout
 
 block content
   -
-   let results =[
+  //-  let results =[
       {
         "insect_Name": "spider",
         "insect_loc": "india",
@@ -32,10 +32,10 @@ block content
   h1= title
   .container-fluid 
     .row 
-      each insect in results
-        div(class="col-sm-2" style=`border:solid 2px black` onclick=`buy(${results.indexOf(insect)})`) 
-          each value,key in insect 
-            = " " +value
+      each insect,key in results
+        div(class="col-sm-2" style=`border:solid 2px black` onclick=`buy(${key})`) 
+            p= insect.insect_Name+" "+insect.insect_loc +" "+insect.insect_variants
+
   script.
     function buy(index){
       alert("You purchased item "+index)

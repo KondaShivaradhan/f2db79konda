@@ -6,6 +6,7 @@ var logger = require('morgan');
 require('dotenv').config();
 const connectionString =
     process.env.MONGO_CON
+console.log("here is URI : " + connectionString);
 mongoose = require('mongoose');
 mongoose.connect(connectionString, {
     useNewUrlParser: true,

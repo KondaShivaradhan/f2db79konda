@@ -1,0 +1,46 @@
+extends layout 
+ 
+block content 
+  h1= title 
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let insectid = toShow._id
+    - let insect_Name = toShow.insect_Name
+    - let insect_loc = toShow.insect_loc
+    - let insect_variants = toShow.insect_variants
+
+    div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{insectid}
+    - let actionid = "/resource/insects/" + insectid
+
+    form(id='InsectForm', action=`/resource/insects/${toShow._id}`, method="PUT") 
+      div.form-group 
+          label.insectAttr(for='insect_Name') Insect type 
+          input#insect_Name(type='text', name='insect_Name' value=toShow.insect_Name) 
+      div.form-group 
+          label.insectAttr(for='insect_loc') Insect insect_loc 
+          input#insect_loc(type='text', name='insect_loc' value=toShow.insect_loc) 
+      div.form-group 
+          label.insectAttr(for='insect_variants') Insect insect_variants 
+          input#insect_variants(type='number', name='insect_variants' value=toShow.insect_variants) 
+      input(type="submit") 
+
+    script. 
+      document.forms['InsectForm'].addEventListener('submit', (event) => { 
+        event.preventDefault(); 
+        // TODO do something here to show user that form is being submitted 
+        fetch(event.target.action, { 
+          method: 'PUT', 
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+        }).then((resp) => { 
+          return resp.json(); // or resp.text() or whatever the server sends 
+        }).then((body) => { 
+          alert("Save succeded") 
+          // TODO handle body 
+        }).catch((error) => { 
+          // TODO handle error 
+          alert("Save failed " + error ) 
+        }); 
+      }); 

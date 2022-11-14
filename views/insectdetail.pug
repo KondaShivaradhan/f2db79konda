@@ -1,0 +1,24 @@
+extends layout 
+ 
+block content 
+  h1= title 
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let insectid = toShow._id 
+    - let insect_Name = toShow.insect_Name 
+    - let insect_loc = toShow.insect_loc 
+    - let insect_variants = toShow.insect_variants 
+    div 
+      div.row 
+        div(class='insectAttr') Insect ID is: 
+        div #{insectid} 
+      div.row 
+        div(class='insectAttr mr-3') Insect Name is: 
+        div #{insect_Name} 
+      div.row 
+        div(class='insectAttr mr-3') Insect Location is: 
+        div #{insect_loc} 
+      div.row 
+        div(class='insectAttr mr-3') Insect Variants is: 
+        div #{insect_variants} 

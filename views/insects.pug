@@ -1,42 +1,72 @@
 extends layout
 
 block content
-  -
-  //-  let results =[
-      {
-        "insect_Name": "spider",
-        "insect_loc": "india",
-        "insect_variant": 123
-      },
-      {
-        "insect_Name": "Ant",
-        "insect_loc": "Africa",
-        "insect_variant": 2342
-      },
-      {
-        "insect_Name": "bees",
-        "insect_loc": "China",
-        "insect_variant": 234
-      },
-      {
-        "insect_Name": "butterfly",
-        "insect_loc": "Sri lanka",
-        "insect_variant": 979
-      },
-      {
-        "insect_Name": "Lizard",
-        "insect_loc": "USA",
-        "insect_variant": 988
-      }
-    ]
-  h1= title
-  .container-fluid 
-    .row 
-      each insect,key in results
-        div(class="col-sm-2" style=`border:solid 2px black` onclick=`buy(${key})`) 
-            p= insect.insect_Name+" "+insect.insect_loc +" "+insect.insect_variants
-
   script.
+    function load(){
+      console.log("cared")
+    }
+  style.
+    a{
+      height:30px;
+      font-size:12px !important;
+      margin:4px;
+    }
+    .item{
+      position:fixed;
+      bottom:0;
+      z-index:-100
+    }
+    .img1{
+      right:30;
+    }
+    .img2{
+      right:30px;
+
+    }
+    body{
+      background:#2776f5;
+    }
+    p{
+      text-align:center;
+      width:100%;
+    }
+    .row{
+      display:flex;
+      justify-content:center
+    }
+    h3{
+      text-align:center;
+      width :100%;
+    }
+    h1{
+      color:white;
+      text-shadow:1px 1px 5px black;
+    }
+    #buttons{
+      border-radius:12px;
+      width:100%;
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-evenly
+    }
+  center
+    h1= title
+    a(class='btn btn-dark' href=`/insects/create`) Create new Insect Instance
+    .container-fluid(onload='load()')
+      .row 
+        each insect,key in results
+          div(class="col-sm-2" style=`border-radius:12px;text-align:center;background:white;border:solid 2px black;display:flex;flex-direction:row;flex-wrap:wrap` onclick=`buy(${key})`) 
+              h3= insect.insect_Name
+              div#buttons
+                a(class='btn btn-primary' href=`/insects/detail/?id=${insect._id}`) Details
+                a(class='btn btn-primary' href=`/insects/update/?id=${insect._id}`) Update
+                a(class='btn btn-primary' href=`/insects/delete/?id=${insect._id}`) Delete
+  img(src="/images/item2.png",class="item img1" height="60" width='100' alt="alt")
+  img(src="/images/item3.png",class="item img2" height="90" width='105' alt="alt")
+  script.
+    function load(){
+      console.log("cared")
+    }
     function buy(index){
       alert("You purchased item "+index)
     }

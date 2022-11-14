@@ -1,0 +1,34 @@
+extends layout 
+ 
+block content 
+  h1= title 
+ 
+  form(id='InsectForm', action="/resource/insects/", method="POST") 
+    div.form-group 
+        label.insectAttr(for='insect_Name') Insect type 
+        input#insect_Name(type='text', name='insect_Name') 
+    div.form-group 
+        label.insectAttr(for='insect_loc') Insect insect_loc 
+        input#insect_loc(type='text', name='insect_loc') 
+    div.form-group 
+        label.insectAttr(for='insect_variants') Insect insect_variants 
+        input#insect_variants(type='number', name='insect_variants') 
+    input(type="submit") 
+ 
+  script. 
+    document.forms['InsectForm'].addEventListener('submit', (event) => { 
+      event.preventDefault(); 
+      // TODO do something here to show user that form is being submitted 
+      fetch(event.target.action, { 
+        method: 'POST', 
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form 
+      }).then((resp) => { 
+        return resp.json(); // or resp.text() or whatever the server sends 
+      }).then((body) => { 
+        alert("Save succeded") 
+        // TODO handle body 
+      }).catch((error) => { 
+        // TODO handle error 
+        alert("Save failed " + error ) 
+      }); 
+    }); 

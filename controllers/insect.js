@@ -40,9 +40,18 @@ exports.insect_create_post = async function(req, res) {
     }
 };
 // Handle Insect delete form on DELETE.
-exports.insect_delete = function(req, res) {
-    res.send('NOT IMPLEMENTED: Insect delete DELETE ' + req.params.id);
+exports.insect_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+        result = await Insect.findByIdAndDelete(req.params.id)
+        console.log("Removed " + result)
+        res.send(result)
+    } catch (err) {
+        res.status(500)
+        res.send(`{"error": Error deleting ${err}}`);
+    }
 };
+
 // Handle Insect update form on PUT.
 exports.insect_update_put = async function(req, res) {
     console.log(req.params.id);
@@ -73,5 +82,47 @@ exports.insect_view_all_Page = async function(req, res) {
     } catch (err) {
         res.status(500);
         res.send(`{"error": ${err}}`);
+    }
+};
+exports.insect_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try {
+        result = await Insect.findById(req.query.id)
+        res.render('insectdetail', { title: 'Insect Detail', toShow: result });
+    } catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+exports.insect_create_Page = function(req, res) {
+    console.log("create view")
+    try {
+        res.render('insectcreate', { title: 'Insect Create' });
+    } catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+
+exports.insect_update_Page = async function(req, res) {
+    try {
+        let result = await Insect.findById(req.query.id)
+        res.render('insectupdate', { title: 'Insect Update', toShow: result });
+    } catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
+    }
+};
+exports.insect_delete_Page = async function(req, res) {
+    console.log("Delete view for id " + req.query.id)
+    try {
+        result = await Insect.findById(req.query.id)
+        res.render('insectdelete', {
+            title: 'Insect Delete',
+            toShow: result
+        });
+    } catch (err) {
+        res.status(500)
+        res.send(`{'error': '${err}'}`);
     }
 };

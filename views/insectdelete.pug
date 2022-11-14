@@ -1,0 +1,48 @@
+extends layout
+block content
+ h1= title
+ if (toShow == null)
+    h2 No instance to delete
+ else
+    - let insectid = toShow._id
+    - let insect_Name = toShow.insect_Name
+    - let insect_loc = toShow.insect_loc
+    - let insect_variants = toShow.insect_variants
+    - let actionid = "/resource/insects/" + insectid
+    script let actionid = "#{actionid}"
+    div
+        div.row
+            div(class='insectAttr mr-3') Insect ID is:
+            div #{insectid}
+        div.row
+            div(class='insectAttr mr-3') Insect Type is:
+            div #{insect_Name}
+        div.row
+            div(class='insectAttr mr-3') Insect Size is:
+            div #{insect_variants}
+        div.row
+            div(class='insectAttr mr-3') Insect Cost is:
+            div #{insect_loc}
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    script.
+        function cancel() {
+            window.location.href='/insects'
+        }
+    script.
+        function deleteOnid() {
+            console.log("starting delete")
+            // delete first
+            fetch(actionid, {
+            method: 'DELETE'
+            }).then((resp) => {
+            return resp.json(); // or resp.text() or whatever the server sends
+            }).then((body) => {
+            alert("Delete succeded")
+            window.location.href='/insects'
+            // TODO handle body
+            }).catch((error) => {
+            // TODO handle error
+            alert("Delete failed " + error )
+            });
+        }

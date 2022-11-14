@@ -7,14 +7,14 @@ var insect_controller = require('../controllers/insect');
 // GET resources base.
 router.get('/', api_controller.api);
 /// COSTUME ROUTES ///
-// POST request for creating a Costume.
+// POST request for creating a Insect.
 router.post('/insects', insect_controller.insect_create_post);
-// DELETE request to delete Costume.
+// DELETE request to delete Insect.
 router.delete('/insects/:id', insect_controller.insect_delete);
-// PUT request to update Costume.
+// PUT request to update Insect.
 router.put('/insects/:id', insect_controller.insect_update_put);
-// GET request for one Costume.
+// GET request for one Insect.
 router.get('/insects/:id', insect_controller.insect_detail);
-// GET request for list of all Costume items.
+// GET request for list of all Insect items.
 router.get('/insects', insect_controller.insect_list);
 module.exports = router;

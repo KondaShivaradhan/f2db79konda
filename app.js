@@ -24,6 +24,10 @@ var insectsRouter = require('./routes/insects');
 var gridbuildRouter = require('./routes/gridbuild');
 var selectorRouter = require('./routes/selector');
 var resourceRouter = require('./routes/resource');
+var insectDetailRouter = require('./routes/insectdetail');
+var createRouter = require('./routes/insectcreate');
+var updateRouter = require('./routes/insectupdate');
+var deleteRouter = require('./routes/insectdelete');
 // modals
 var Insect = require("./models/insect");
 
@@ -44,6 +48,10 @@ app.use('/insects', insectsRouter);
 app.use('/gridbuild', gridbuildRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resourceRouter);
+app.use('/insects', insectDetailRouter);
+app.use('/insects', createRouter);
+app.use('/insects', updateRouter);
+app.use('/insects', deleteRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -24,7 +24,11 @@ block content
 
     }
     body{
-      background:#2776f5;
+      //- background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(https://images.pexels.com/photos/257552/pexels-photo-257552.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2);
+      background:#eab676;
+      
+      height:100vh;
+      background-repeat:no-repeat;
     }
     p{
       text-align:center;
@@ -40,7 +44,7 @@ block content
     }
     h1{
       color:white;
-      text-shadow:1px 1px 5px black;
+      text-shadow:1px 1px 12px black;
     }
     #buttons{
       border-radius:12px;
@@ -49,13 +53,20 @@ block content
       flex-wrap:wrap;
       justify-content:space-evenly
     }
-  center
+    .center{
+      text-align:center;
+      position:relative;
+      top:50%;
+      transform:translateY(-50%);
+    }
+
+  .center
     h1= title
-    a(class='btn btn-dark' href=`/insects/create`) Create new Insect Instance
+    a(class='btn btn-primary' href=`/insects/create`) Create new Insect Instance
     .container-fluid(onload='load()')
       .row 
         each insect,key in results
-          div(class="col-sm-2" style=`border-radius:12px;text-align:center;background:white;border:solid 2px black;display:flex;flex-direction:row;flex-wrap:wrap` onclick=`buy(${key})`) 
+          div(class="col-sm-2" style=`margin:5px;border-radius:12px;text-align:center;background:white;border:solid 2px black;display:flex;flex-direction:row;flex-wrap:wrap` onclick=`buy(${key})`) 
               h3= insect.insect_Name
               div#buttons
                 a(class='btn btn-primary' href=`/insects/detail/?id=${insect._id}`) Details

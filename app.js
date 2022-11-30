@@ -3,10 +3,28 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        Account.findOne({ username: username }, function(err, user) {
+            if (err) { return done(err); }
+            if (!user) {
+                return done(null, false, { message: 'Incorrect username.' });
+            }
+            if (!user.validPassword(password)) {
+                return done(null, false, { message: 'Incorrect password.' });
+            }
+            return done(null, user);
+        });
+    }))
+
 require('dotenv').config();
+
+
 const connectionString =
     process.env.MONGO_CON
-console.log("here is URI : " + connectionString);
+    // console.log("here is URI : " + connectionString);
 mongoose = require('mongoose');
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
@@ -24,18 +42,19 @@ var insectsRouter = require('./routes/insects');
 var gridbuildRouter = require('./routes/gridbuild');
 var selectorRouter = require('./routes/selector');
 var resourceRouter = require('./routes/resource');
-var insectDetailRouter = require('./routes/insectdetail');
-var createRouter = require('./routes/insectcreate');
-var updateRouter = require('./routes/insectupdate');
-var deleteRouter = require('./routes/insectdelete');
 // modals
 var Insect = require("./models/insect");
-
+var Account = require('./models/account');
 var app = express();
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -48,11 +67,9 @@ app.use('/insects', insectsRouter);
 app.use('/gridbuild', gridbuildRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resourceRouter);
-app.use('/insects', insectDetailRouter);
-app.use('/insects', createRouter);
-app.use('/insects', updateRouter);
-app.use('/insects', deleteRouter);
-
+passport.use(new LocalStrategy(Account.authenticate()));
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));

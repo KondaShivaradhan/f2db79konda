@@ -1,4 +1,0 @@
- //- each insect in results
-      //-   div(class="col-sm-2" style=`border:solid 2px black` onclick=`buy(${results.indexOf(insect)})`) 
-      //-     each value,key in insect 
-      //-       = " " +value

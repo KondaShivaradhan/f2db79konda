@@ -36,7 +36,8 @@ exports.insect_create_post = async function(req, res) {
         res.send(result);
     } catch (err) {
         res.status(500);
-        res.send(`{"error": ${err}}`);
+        // res.send(`{"error": ${err}}`);
+        res.send(`{"error": " - Pleaes enter Valid Data"}`);
     }
 };
 // Handle Insect delete form on DELETE.

@@ -1,1 +1,0 @@
-{ _id: new ObjectId("6366baced5273d7738f4a960"), insect_Name: 'beetle', insect_loc: 'gaana', insect_variants: 24, __v: 0 }, { _id: new ObjectId("6366baced5273d7738f4a95f"), insect_Name: 'bat', insect_loc: 'Africa', insect_variants: 22, __v: 0 }, { _id: new ObjectId("6366baced5273d7738f4a961"), insect_Name: 'snail', insect_loc: 'cuba', insect_variants: 78, __v: 0 }
